@@ -27,8 +27,8 @@ def all_tasks():
     # Render the template and pass the list of tasks
     return render_template('all_tasks.html', tasks=tasks)
 
-def sayHello():
-    return "hello"
+# def sayHello():
+#     return "hello"
 
 
 if __name__ == '__main__':
