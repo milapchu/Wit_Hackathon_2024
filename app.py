@@ -29,6 +29,7 @@ def all_tasks():
 
 def say_hello():
     print ("Hello")
+    print ("hi")
     
 if __name__ == '__main__':
     app.run(debug=True)
