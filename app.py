@@ -6,12 +6,10 @@ tasks = []
 
 @app.route('/')
 def home():
-
-    # return "Hello, Flask!"
+    # Render the home page template
     return render_template('home.html')
 
-
-@app.route('/create-task')
+@app.route('/create-task', methods=['GET', 'POST'])
 def create_task():
     if request.method == 'POST':
         # Get the task name from the form submission
@@ -27,11 +25,12 @@ def all_tasks():
     # Render the template and pass the list of tasks
     return render_template('all_tasks.html', tasks=tasks)
 
+def say_hello():
+    print("Hello")
+    print("hi")
+
 def sayHello():
     return "hello"
 
-
 if __name__ == '__main__':
     app.run(debug=True)
-
-
