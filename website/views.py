@@ -11,7 +11,7 @@ views = Blueprint('views', __name__)
 def home():
     return render_template("home.html", user=current_user)
 
-# @views.route('/create_task')
-# @login_required
-# def create_task():
-#     return render_template("create_task.html", user=current_user)
+@views.route('/group')
+@login_required
+def group():
+    return render_template("group.html", user=current_user)

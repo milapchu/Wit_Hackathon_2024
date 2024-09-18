@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Create Group{% endblock %}
+
+{% block content %}
+<form method="POST" action="{{ url_for('group.create_group') }}">
+    <h3 align="center">Create New Group</h3>
+    
+    <!-- Group Name Field -->
+    <div class="form-group">
+        <label for="group_name">Group Name</label>
+        <input 
+            type="text" 
+            class="form-control" 
+            id="group_name" 
+            name="group_name" 
+            placeholder="Enter group name"
+            required>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Add Group</button>
+</form>
+
+{{ text }}
+{% endblock %}
