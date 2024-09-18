@@ -21,9 +21,9 @@ def create_task():
             db.session.add(new_task)
             db.session.commit()
             flash('Task created successfully!', category='success')
-            return redirect(url_for('auth.create_task'))
+            return redirect(url_for('auth.create'))
 
-    return render_template("create_task.html", user=current_user)
+    return render_template("create.html", user=current_user)
 
 
 
