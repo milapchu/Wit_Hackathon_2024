@@ -11,16 +11,16 @@ def create_task():
     if request.method == 'POST':
         task_name = request.form.get('task')
         frequency = request.form.get('frequency')
-        group_id = request.form.get('group_id')
+        group_name = request.form.get('group_name')
 
-        group = Group.query.filter_by(id=group_id).first()
+        group = Group.query.filter_by(group_name=group_name).first()
         if group:
-            flash('Added task to your group successfully', category='success')
+            flash('Task added!', category='success')
             new_task = Task(
                 task_name=task_name, 
                 user_id=current_user.id, 
                 frequency=frequency, 
-                group_id=group_id
+                group_id=group.id
             )
             db.session.add(new_task)
             db.session.commit()
@@ -29,3 +29,10 @@ def create_task():
             flash('Group id does not exist, please insert again', category='error')
 
     return render_template("create_task.html", user=current_user)
+
+@task.route('/view_tasks', methods=['GET'])
+@login_required
+def view_tasks():
+    tasks = Task.query.filter_by(user_id=current_user.id).all()
+    print(current_user.id)
+    return render_template('view_tasks.html', tasks=tasks, user=current_user)

@@ -2,9 +2,9 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h1>This is Home Page</h1>
+<h1>Home</h1>
     <!-- Add buttons to navigate to other pages in this block -->
-    <a href="{{ url_for('task.create_task') }}">
-        <button>Create Task</button>
+    <a href="{{ url_for('group.create_group') }}">
+        <button>Create Group</button>
     </a>
 {% endblock %}

@@ -31,6 +31,6 @@ class User(db.Model, UserMixin):
 
 class Group(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    group_name  = db.Column(db.String(100), nullable=False)
+    group_name  = db.Column(db.String(100), nullable=False, unique=True)
     tasks = db.relationship('Task') #all tasks of a user
 
