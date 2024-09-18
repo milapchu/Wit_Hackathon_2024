@@ -29,8 +29,5 @@ def say_hello():
     print("Hello")
     print("hi")
 
-def sayHello():
-    return "hello"
-
 if __name__ == '__main__':
     app.run(debug=True)
