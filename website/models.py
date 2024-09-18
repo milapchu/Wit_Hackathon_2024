@@ -15,8 +15,8 @@ class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     task_name = db.Column(db.String(100), nullable=False)
     date = db.Column(db.DateTime(timezone=True), default=func.now())
-    status =db.Column(Enum('Done','Not Done'),name = 'task_status', nullable = False, default = 'Not Done')
-    frequency = db.Column(Enum('Daily','Weekly','Fortnightly','Monthly'), name = 'task_frenquency', nullable = False, default = 'Monthly')
+    status =db.Column(Enum('Done','Not Done'), nullable = False, default = 'Not Done')
+    frequency = db.Column(Enum('Daily','Weekly','Fortnightly','Monthly'), nullable = False, default = 'Monthly')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id')) # one user can have many tasks
     group_id  = db.Column(db.Integer, db.ForeignKey('group.id')) # one group can have many tasks
 

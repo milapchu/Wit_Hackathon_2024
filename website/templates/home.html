@@ -1,7 +1,10 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %}
+{% extends "base.html" %} 
+{% block title %}Home{% endblock %}
 
 {% block content %}
-<h1 This is Home Page>
+<h1>This is Home Page</h1>
     <!-- Add buttons to navigate to other pages in this block -->
-</h1>
+    <a href="{{ url_for('task.create_task') }}">
+        <button>Create Task</button>
+    </a>
 {% endblock %}

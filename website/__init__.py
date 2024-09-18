@@ -16,9 +16,13 @@ def create_app():
      # Register blueprints for routing
     from .views import views
     from .auth import auth
+    from .task import task
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
+    app.register_blueprint(task, url_prefix='/task')
+
+
 
     from .models import User, Group, Task
     
@@ -32,6 +36,14 @@ def create_app():
     @login_manager.user_loader
     def load_user(id):
         return User.query.get((int(id)))
+    
+    # Debug route
+    @app.route('/debug-url')
+    def debug_url():
+        try:
+            return str(url_for('task.create_task'))
+        except Exception as e:
+            return str(e)
 
 
     return app
