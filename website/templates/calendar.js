@@ -95,3 +95,4 @@ function nextMonth() {
 
 // Initialize the calendar when the page loads
 generateCalendar(currentDate);
+
