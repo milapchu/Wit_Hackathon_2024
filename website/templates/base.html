@@ -39,6 +39,8 @@
                 {% if user.is_authenticated %}
                 <a class="nav-item nav-link" id="home" href="/">Home</a>
                 <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+                <a class="nav-item nav-link" id="create_task" href="{{url_for('task.create_task')}}">Create Task</a>
+                <a class="nav-item nav-link" id="view-tasks" href="{{ url_for('task.view_tasks') }}">View Tasks</a>
                 {% else %}
                 <a class="nav-item nav-link" id="login" href="/login">Login</a>
                 <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>

@@ -1,0 +1,11 @@
+
+{% extends "base.html" %}
+{% block title %}Group{% endblock %}
+
+{% block content %}
+<h1>Group</h1>
+<!-- buttons to navigate to other pages in this block -->
+<a href="{{ url_for('task.create_task') }}">
+    <button>Create Task</button>
+</a>
+{% endblock %}
