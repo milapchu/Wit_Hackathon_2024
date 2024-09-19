@@ -20,6 +20,7 @@ def create_group():
             flash('Create group!')
             new_group = Group(group_name=group_name)
             new_group.members.append(current_user)
+            current_user.group_name = group_name
             db.session.add(new_group)
             db.session.commit()
 
@@ -45,6 +46,7 @@ def join_group():
         
         if not group:
             flash('Group not found.', category='error')
+            return redirect(url_for('group.join_group'))  # Redirect to the same page for the user to try again
         else:
             # Add user to the group
             current_user.group = group
@@ -52,4 +54,7 @@ def join_group():
 
             flash('You have joined the group successfully!', category='success')
             return redirect(url_for('views.group'))
+
+    return render_template("join_group.html", user=current_user)  # Ensure you have a return for GET requests
+
 

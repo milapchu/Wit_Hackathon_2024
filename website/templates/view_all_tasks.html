@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
 {% block title %}
-    View Allocated Tasks
+    View All Tasks
 {% endblock %}
 
 {% block content %}
     <div class="mt-5">
-        <h2>Task Allocation for {{ group.group_name }}</h2>
+        <h2>All tasks in {{ group.group_name }}</h2>
 
         <!-- Check if there are tasks to display -->
         {% if tasks %}
@@ -14,7 +14,6 @@
                 <thead>
                     <tr>
                         <th>Task Name</th>
-                        <th>Assigned User</th>
                         <th>Frequency</th>
                     </tr>
                 </thead>
@@ -22,13 +21,6 @@
                     {% for task in tasks %}
                     <tr>
                         <td>{{ task.task_name }}</td>
-                        <td>
-                            {% if task.user %}
-                                {{ task.user.name }}
-                            {% else %}
-                                Unassigned
-                            {% endif %}
-                        </td>
                         <td>{{ task.frequency }}</td>
                     </tr>
                     {% endfor %}

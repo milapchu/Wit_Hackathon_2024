@@ -9,11 +9,13 @@ task = Blueprint('task', __name__)
 @login_required
 def create_task():
     from website import db
-    from .models import Task, Group, user_group
+    from .models import Task, Group
     if request.method == 'POST':
         task_name = request.form.get('task')
         frequency = request.form.get('frequency')
-        group_name = request.form.get('group_name')
+        
+        user_group = current_user.group
+        group_name = user_group.group_name
 
         # Define allowed frequency values
         allowed_frequencies = ['Daily', 'Weekly', 'Fortnightly', 'Monthly']
@@ -30,9 +32,8 @@ def create_task():
         if group:
             flash('Task added!', category='success')
             new_task = Task(
-                task_name=task_name, 
-                user_id=current_user.id, 
-                frequency=frequency_normalize,  # Directly use the frequency string
+                task_name=task_name,  
+                frequency=frequency_normalize,
                 group_id=group.id
             )
             db.session.add(new_task)
@@ -48,12 +49,19 @@ def create_task():
 def view_tasks():
     from website import db
     from .models import Task
-    tasks = Task.query.filter_by(user_id=current_user.id).all()
+    
+    if not current_user.group:
+        flash('You are not in any group.', category='error')
+        return redirect(url_for('some_other_view'))  # Redirect to an appropriate view
+
+    # Retrieve only the tasks assigned to the current user in their group
+    tasks = Task.query.filter_by(group_id=current_user.group.id, user_id=current_user.id).all()
+
     return render_template('view_tasks.html', tasks=tasks, user=current_user)
 
 def allocate_tasks_randomly(group_id, frequency):
     from website import db
-    from .models import Task, Group, User, user_group
+    from .models import Task, Group, User
 
     group = Group.query.filter_by(id=group_id).first()
     if not group:
@@ -61,7 +69,8 @@ def allocate_tasks_randomly(group_id, frequency):
         return
     
     # Fetch users in the group using the association table
-    group_users = group_users = group.users
+    group_users = group.members
+    print(f"Group Users: {[user.first_name for user in group_users]}")
     if not group_users:
         print(f"No users found in group with id {group_id}")
         return
@@ -108,21 +117,22 @@ def allocate_tasks():
     from website import db
     from .models import Task, Group
     if request.method == 'POST':
-
         user_group_id = current_user.group.id
         frequency = request.form.get('frequency')
+        action = request.form.get('action')
+        
+        group = Group.query.get(user_group_id)
 
         if user_group_id:
             # Call the task allocation function
             allocate_tasks_randomly(group_id=user_group_id, frequency=frequency)
 
-            # Retrieve the allocated tasks after the allocation is done
-            allocated_tasks = Task.query.filter_by(group_id=user_group_id, frequency=frequency).all()
-
-            flash('Tasks have been allocated successfully!', category='success')
-
-            # Pass the allocated tasks to the new template
-            return render_template('view_allocated_tasks.html', tasks=allocated_tasks, group=group, user=current_user)
+            if action == 'view_allocated':
+                allocated_tasks = Task.query.filter_by(group_id=user_group_id, user_id=current_user.id).all()
+                return render_template('view_tasks.html', tasks=allocated_tasks, user=current_user)
+            elif action == 'view_all':
+                all_tasks = Task.query.filter_by(group_id=user_group_id).all()
+                return render_template('view_all_tasks.html', tasks=all_tasks, group=group, user=current_user)
         else:
             flash('You have not been in any group, please create or join one', category='error')
 
