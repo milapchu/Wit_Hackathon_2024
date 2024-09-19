@@ -3,41 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Calendar</title>
+    <title>Task Calendar</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
         .calendar {
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 90%;
+            max-width: 1000px;
             margin: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .calendar-header {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             width: 100%;
-            max-width: 600px; /* Optional: limits the width of the calendar */
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        .calendar-header h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .calendar-header button {
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .calendar-header button:hover {
+            background-color: #0056b3;
         }
         table {
+            width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
-            width: 100%; /* Ensure the table takes the full width of its container */
         }
-        td, th {
-            border: 1px solid #000;
-            padding: 10px;
-            width: 50px;
-            height: 50px; /* Ensures cells are square */
+        th, td {
+            width: 14.28%; /* 100% / 7 days */
+            height: 80px;
+            border: 1px solid #ddd;
             text-align: center;
-            vertical-align: top; /* Aligns content to the top of the cell */
-        }
-        .calendar-date {
-            font-size: 12px; /* Smaller font size for dates */
-            color: #666;
-            margin-top: 5px;
+            vertical-align: top;
+            position: relative;
         }
         .task {
-            margin-top: 10px; /* Space above tasks */
-            font-size: 12px; /* Adjust font size as needed */
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            padding: 5px;
+            margin-top: 5px;
+            font-size: 12px;
+            color: #721c24;
         }
     </style>
 </head>
