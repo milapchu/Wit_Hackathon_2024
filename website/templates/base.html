@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <!-- External Stylesheets -->
     <link
         rel="stylesheet"
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -14,13 +16,20 @@
         href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         crossorigin="anonymous"
     />
+    
     <style>
         .navbar-custom {
-            background-color: #a08679;
+            background-color: #5c3c0e;
         }
     </style>
+    
     <title>{% block title %}Home{% endblock %}</title>
+    
+    <!-- Block for additional CSS -->
+    {% block extra_css %}{% endblock %}
 </head>
+</html>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <button 
