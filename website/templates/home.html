@@ -3,8 +3,78 @@
 
 {% block content %}
 <h1>Home</h1>
+<div class="button-container">
     <!-- Add buttons to navigate to other pages in this block -->
-    <a href="{{ url_for('group.create_group') }}">
-        <button>Create Group</button>
+    <a href="{{ url_for('group.create_group') }}" class="button-link">
+        <button class="custom-button">Create Group</button>
     </a>
+
+    <a href="{{ url_for('group.join_group') }}" class="button-link">
+        <button class="custom-button">Join Group</button>
+    </a>
+</div>
 {% endblock %}
+
+<style>
+    body {
+        font-family: 'Times New Roman', Times, serif;
+        background-color: #f5f1e9; /* Beige background */
+        color: #5b3e31; /* Dark brown text */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column; /* Align items vertically */
+        justify-content: flex-start; /* Align content to the top */
+        align-items: center; /* Center content horizontally */
+        height: 100vh;
+        padding-top: 50px; /* Add some padding at the top */
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 36px;
+        margin-bottom: 40px;
+        color: #855e46; /* Light brown color for title */
+    }
+
+    .button-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px; /* Space between buttons */
+    }
+
+    .button-link {
+        text-decoration: none; /* Remove underline */
+        color: inherit; /* Ensure the link adopts the button's text color */
+    }
+
+    .custom-button {
+        background-color: #d8cbc4; /* Light brown */
+        color: #5b3e31; /* Dark brown text */
+        border: 2px solid #5b3e31;
+        border-radius: 10px;
+        padding: 15px 40px;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 200px; /* Set a consistent width */
+        height: 60px; /* Set a consistent height */
+        display: flex; /* Use flexbox to center text */
+        align-items: center;
+        justify-content: center;
+    }
+
+    .custom-button:hover {
+        background-color: #bca89f; /* Darker beige on hover */
+    }
+
+    .custom-button:active {
+        background-color: #a48978; /* Even darker on click */
+    }
+
+    .custom-button:focus {
+        outline: none;
+    }
+</style>
