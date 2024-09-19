@@ -18,8 +18,10 @@ def create_task():
         # Define allowed frequency values
         allowed_frequencies = ['Daily', 'Weekly', 'Fortnightly', 'Monthly']
 
+        frequency_normalize = frequency.capitalize()
+
         # Check if the frequency is valid
-        if frequency not in allowed_frequencies:
+        if frequency_normalize not in allowed_frequencies:
             flash('Invalid task frequency! Please choose from Daily, Weekly, Fortnightly, or Monthly.', category='error')
             return redirect(url_for('task.create_task'))
         
@@ -30,7 +32,7 @@ def create_task():
             new_task = Task(
                 task_name=task_name, 
                 user_id=current_user.id, 
-                frequency=frequency,  # Directly use the frequency string
+                frequency=frequency_normalize,  # Directly use the frequency string
                 group_id=group.id
             )
             db.session.add(new_task)
@@ -59,7 +61,7 @@ def allocate_tasks_randomly(group_id, frequency):
         return
     
     # Fetch users in the group using the association table
-    group_users = User.query.join(user_group).filter(user_group.c.group_id == group_id).all()
+    group_users = group_users = group.users
     if not group_users:
         print(f"No users found in group with id {group_id}")
         return
@@ -86,11 +88,11 @@ def allocate_tasks_by_frequency():
     now = datetime.now()
     tasks = db.session.query(Task).all()
     for task in tasks:
-        if task.frequency == 'WEEKLY':
+        if task.frequency == 'Weekly':
             next_allocation = task.last_allocated + timedelta(weeks=1)
-        elif task.frequency == 'DAILY':
+        elif task.frequency == 'Daily':
             next_allocation = task.last_allocated + timedelta(days=1)
-        elif task.frequency == 'MONTHLY':
+        elif task.frequency == 'Monthly':
             next_allocation = task.last_allocated + timedelta(days=30)
         else:
             continue  # Skip if frequency is not recognized
@@ -106,23 +108,22 @@ def allocate_tasks():
     from website import db
     from .models import Task, Group
     if request.method == 'POST':
-        group_name = request.form.get('group_name')
+
+        user_group_id = current_user.group.id
         frequency = request.form.get('frequency')
 
-        group = Group.query.filter_by(group_name=group_name).first()
-
-        if group:
+        if user_group_id:
             # Call the task allocation function
-            allocate_tasks_randomly(group_id=group.id, frequency=frequency)
+            allocate_tasks_randomly(group_id=user_group_id, frequency=frequency)
 
             # Retrieve the allocated tasks after the allocation is done
-            allocated_tasks = Task.query.filter_by(group_id=group.id, frequency=frequency).all()
+            allocated_tasks = Task.query.filter_by(group_id=user_group_id, frequency=frequency).all()
 
             flash('Tasks have been allocated successfully!', category='success')
 
             # Pass the allocated tasks to the new template
             return render_template('view_allocated_tasks.html', tasks=allocated_tasks, group=group, user=current_user)
         else:
-            flash('Group name does not exist. Please enter a valid group name.', category='error')
+            flash('You have not been in any group, please create or join one', category='error')
 
     return render_template('task_allocation.html', user=current_user)

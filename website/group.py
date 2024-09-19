@@ -18,14 +18,38 @@ def create_group():
         
         else:
             flash('Create group!')
-            new_group = Group(
-                group_name=group_name
-            )
+            new_group = Group(group_name=group_name)
+            new_group.members.append(current_user)
             db.session.add(new_group)
             db.session.commit()
+
+            flash('Group created successfully!', category='success')
             return redirect(url_for('views.group'))
 
     
     return render_template("create_group.html", user=current_user)
 
+@group.route('/join_group', methods=['GET', 'POST'])
+@login_required
+def join_group():
+    if request.method == 'POST':
+        group_name = request.form.get('group_name')
+        
+        # Check if the user is already in a group
+        if current_user.group:
+            flash('You are already a member of a group.', category='error')
+            return redirect(url_for('views.group'))
+
+        # Find the group by name
+        group = Group.query.filter_by(group_name=group_name).first()
+        
+        if not group:
+            flash('Group not found.', category='error')
+        else:
+            # Add user to the group
+            current_user.group = group
+            db.session.commit()
+
+            flash('You have joined the group successfully!', category='success')
+            return redirect(url_for('views.group'))
 

@@ -23,8 +23,8 @@
                     <tr>
                         <td>{{ task.task_name }}</td>
                         <td>
-                            {% if task.assigned_user %}
-                                {{ task.assigned_user.name }}
+                            {% if task.user %}
+                                {{ task.user.name }}
                             {% else %}
                                 Unassigned
                             {% endif %}
@@ -35,7 +35,7 @@
                 </tbody>
             </table>
         {% else %}
-            <p>No tasks allocated for this group and frequency yet.</p>
+            <p>No tasks allocated for this group yet.</p>
         {% endif %}
     </div>
 {% endblock %}
