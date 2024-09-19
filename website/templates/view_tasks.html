@@ -24,7 +24,12 @@
                     <tr>
                         <td>{{ task.task_name }}</td>
                         <td>{{ task.frequency }}</td>
-                        <td>{{ task.status }}</td>
+                        <td>
+                            <select class="status-select" data-task-id="{{ task.id }}" onchange="updateStatus(this)">
+                                <option value="not_done" {% if task.status == 'not_done' %}selected{% endif %}>Not Done</option>
+                                <option value="done" {% if task.status == 'done' %}selected{% endif %}>Done</option>
+                            </select>
+                        </td>
                         <td>{{ task.date.strftime('%Y-%m-%d') }}</td>
                     </tr>
                     {% endfor %}
@@ -41,42 +46,46 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f0f0f0;
+            background-color: #f9f3e7; /* Light beige background */
         }
 
         .header {
             text-align: center;
-            padding: 40px 0;
+            padding: 60px 0;
+            background-color: #f5e8d0; /* Soft beige background */
         }
 
         .header h1 {
             font-size: 48px;
             font-family: 'Brush Script MT', cursive;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+            color: #8c5e3c; /* Warm brown color */
         }
 
         .hero-section {
-            background-color: #d0d0d0;
-            padding: 50px 0;
+            background-color: #f5e8d0; /* Matching beige background */
+            padding: 60px 0;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: auto;
+            margin-top: 30px;
         }
 
         .centered-content {
-            background-color: #fff;
-            padding: 20px;
+            background-color: #fff; /* White background for content */
+            padding: 30px;
             border-radius: 8px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.1);
             width: 80%; /* Adjusted width for better layout */
         }
 
         .hero-section h2 {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
             margin: 20px 0;
+            color: #8c5e3c; /* Warm brown color */
         }
 
         .table {
@@ -86,7 +95,7 @@
         }
 
         .table thead {
-            background-color: #343a40;
+            background-color: #8c5e3c; /* Warm brown for table header */
             color: #fff;
         }
 
@@ -99,18 +108,34 @@
             padding: 15px;
         }
 
-        select {
+        .status-select {
             width: 100%;
             padding: 5px;
             font-size: 16px;
-            border: 1px solid #ccc;
+            border: 1px solid #d3bfa7; /* Light brown border */
             border-radius: 4px;
+            background-color: #fff; /* White background for dropdown */
         }
     </style>
 {% endblock %}
 
 {% block extra_js %}
     <script>
-        // JavaScript code for status update, if needed, goes here
+        function updateStatus(select) {
+            var status = select.value;
+            var taskId = select.getAttribute('data-task-id');
+            // Make an AJAX request to update the task status on the server
+            fetch('/update-task-status', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({ id: taskId, status: status })
+            }).then(response => response.json())
+              .then(data => {
+                // Handle response if needed
+              });
+        }
     </script>
 {% endblock %}
