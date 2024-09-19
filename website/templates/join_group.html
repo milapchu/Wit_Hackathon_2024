@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block title %}Join Group{% endblock %}
+
+{% block content %}
+
+    <!-- Form for joining a group -->
+    <div class="form-container">
+        <form method="POST" action="{{ url_for('group.join_group') }}">
+            <h1 align="center">Join a Group</h1>
+            
+            <!-- Group Name Field -->
+            <div class="form-group">
+                <label for="group_name">Group Name</label>
+                <input 
+                    type="text"
+                    class="form-control" 
+                    id="group_name" 
+                    name="group_name" 
+                    placeholder="Enter group name"
+                    required>
+            </div>
+            
+            <br />
+            <button type="submit" class="btn btn-primary">Join Group</button>
+        </form>
+    </div>
+
+    <!-- Hero section with image -->
+    <div class="hero-section">
+        <h2 align="center">Join a group and collaborate!</h2>
+        <img src="https://i.pinimg.com/originals/bc/83/3e/bc833eb8675ec2e5511a62016312f473.jpg" alt="Bear">
+    </div>
+
+    {{ text }}
+{% endblock %}
+
+{% block extra_css %}
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            font-family: 'Brush Script MT', cursive;
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            text-align: center;
+            margin: 20px auto;
+            background-color: #d0d0d0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            width: 60%;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: block;
+            text-align: left;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .btn-primary {
+            padding: 10px 30px;
+            background-color: #d0d0d0;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #bca89f;
+        }
+
+        .hero-section {
+            background-color: #d0d0d0;
+            text-align: center;
+            padding: 50px 0;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px; /* Ensures space between form and hero section */
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 70%;
+            background: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .hero-section h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-section img {
+            max-width: 400px;
+            z-index: 2;
+            position: relative;
+        }
+    </style>
+{% endblock %}
