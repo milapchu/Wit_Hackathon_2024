@@ -1,8 +1,9 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
-import os
 from flask_login import LoginManager
+from apscheduler.schedulers.background import BackgroundScheduler
+import atexit
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -12,8 +13,8 @@ def create_app():
     app.config['SECRET_KEY'] = 'BFAJBFAJDBCDABCIUDAKBCDBCJHAB'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     db.init_app(app)
-    
-     # Register blueprints for routing
+
+    # Register blueprints for routing
     from .views import views
     from .auth import auth
     from .task import task
@@ -24,29 +25,29 @@ def create_app():
     app.register_blueprint(task, url_prefix='/task')
     app.register_blueprint(group, url_prefix='/group')
 
-
-
-    from .models import User, Group, Task
-    
+    # Initialize the database
     with app.app_context():
+        from .models import User, Group, Task
         db.create_all()
-    
+
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
 
     @login_manager.user_loader
     def load_user(id):
-        return User.query.get((int(id)))
-    
-    # Debug route
-    @app.route('/debug-url')
-    def debug_url():
-        try:
-            return str(url_for('task.create_task'))
-        except Exception as e:
-            return str(e)
+        from .models import User
+        return User.query.get(int(id))
 
+    from .task import allocate_tasks_by_frequency
+
+    # Set up APScheduler for task allocation
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(func=allocate_tasks_by_frequency, trigger="interval", hours=24)  # Runs every 24 hours
+    scheduler.start()
+
+    # Shut down the scheduler when the app exits
+    atexit.register(lambda: scheduler.shutdown())
 
     return app
 
@@ -54,5 +55,3 @@ def create_database(app):
     if not path.exists('website/' + DB_NAME):
         db.create_all(app=app)
         print('Created Database!')
-
-

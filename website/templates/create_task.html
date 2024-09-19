@@ -6,7 +6,7 @@
     <!-- Form for creating a task -->
     <div class="form-container">
         <form method="POST" action="{{ url_for('task.create_task') }}">
-            <h1 align="center">Create New Task</h1>
+            <h1 class="create-task-title" align="center">Create New Task</h1>
             
             <!-- Task Name Field -->
             <div class="form-group">
@@ -51,8 +51,8 @@
 
     <!-- Hero section with image -->
     <div class="hero-section">
-        <h2 align="center">Let's organise your week</h2>
-        <img src="https://i.pinimg.com/originals/bc/83/3e/bc833eb8675ec2e5511a62016312f473.jpg" alt="Bear">
+        <h2 align="center">Let's organise your week!</h2>
+        <img src="https://th.bing.com/th?q=Beige+Bear+Cartoon+Wallpaper&w=120&h=120&c=1&rs=1&qlt=90&cb=1&dpr=2&pid=InlineBlock&mkt=en-AU&cc=AU&setlang=en&adlt=strict&t=1&mw=247" alt="Bear">
     </div>
 
     {{ text }}
@@ -61,23 +61,26 @@
 {% block extra_css %}
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Times New Roman', sans-serif;
             background-color: #f9f3e7; /* Light beige background */
             margin: 0;
             padding: 0;
         }
-        
+
+        .create-task-title {
+            color: #5b3e31; /* Change this color to your preferred color */
+        }
         .header {
             text-align: center;
             padding: 60px 0;
-            background-color: #f5e8d0; /* Soft beige background */
+            background-color: #5b3e31;
         }
         
         .header h1 {
             font-size: 48px;
             font-family: 'Brush Script MT', cursive;
             margin-bottom: 10px;
-            color: #8c5e3c; /* Warm brown color */
+            color: #5b3e31;
         }
         
         .form-container {
@@ -100,21 +103,21 @@
             margin-bottom: 8px;
             display: block;
             text-align: left;
-            color: #8c5e3c; /* Warm brown color for labels */
+            color: #5b3e31; /* Warm brown color for labels */
         }
         
         .form-group input {
             width: 100%;
             padding: 12px;
             font-size: 16px;
-            border: 1px solid #d3bfa7; /* Light brown border for input fields */
+            border: 1px solid #5b3e31; /* Light brown border for input fields */
             border-radius: 4px;
             box-sizing: border-box;
         }
         
         .btn-primary {
             padding: 12px 24px;
-            background-color: #a57c5d; /* Medium brown for button */
+            background-color: #5b3e31; /* Medium brown for button */
             color: #fff;
             border: none;
             border-radius: 4px;
@@ -128,7 +131,7 @@
         }
         
         .hero-section {
-            background-color: #f5e8d0; /* Soft beige background to match the header */
+            background-color: #5c3c0e; 
             text-align: center;
             padding: 60px 0;
             position: relative;
@@ -155,11 +158,11 @@
             margin: 20px 0;
             z-index: 2;
             position: relative;
-            color: #8c5e3c; /* Warm brown color */
+            color: #fff; /* Warm brown color */
         }
         
         .hero-section img {
-            max-width: 80%; /* Responsive image with max-width */
+            max-width: 100%;
             height: auto;
             max-height: 300px;
             z-index: 2;

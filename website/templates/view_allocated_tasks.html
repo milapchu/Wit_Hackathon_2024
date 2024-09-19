@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+    View Allocated Tasks
+{% endblock %}
+
+{% block content %}
+    <div class="mt-5">
+        <h2>Task Allocation for {{ group.group_name }}</h2>
+
+        <!-- Check if there are tasks to display -->
+        {% if tasks %}
+            <table class="table table-bordered table-striped mt-4">
+                <thead>
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Assigned User</th>
+                        <th>Frequency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                    <tr>
+                        <td>{{ task.task_name }}</td>
+                        <td>
+                            {% if task.assigned_user %}
+                                {{ task.assigned_user.name }}
+                            {% else %}
+                                Unassigned
+                            {% endif %}
+                        </td>
+                        <td>{{ task.frequency }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No tasks allocated for this group and frequency yet.</p>
+        {% endif %}
+    </div>
+{% endblock %}
