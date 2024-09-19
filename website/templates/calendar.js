@@ -4,22 +4,24 @@ function generateCalendar(date, tasks = []) {
     const calendarBody = document.getElementById("calendarBody");
     const monthYear = document.getElementById("monthYear");
 
-    // Clear previous calendar cells
+    // Clear previous calendar content
     calendarBody.innerHTML = "";
 
-    // Get month and year
     const month = date.getMonth();
     const year = date.getFullYear();
 
-    // Set the month and year in the header
-    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    // Array of month names
+    const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
     monthYear.textContent = `${monthNames[month]} ${year}`;
 
-    // Get the first day and number of days in the month
+    // Get the first day of the month and the number of days in the month
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-    // Create the rows and cells for the calendar
+    // Create rows for the calendar
     let row = document.createElement("tr");
     let day = 1;
 
@@ -30,16 +32,22 @@ function generateCalendar(date, tasks = []) {
         row.appendChild(cell);
     }
 
-    // Add the days of the month
+    // Add cells for the days of the month
     for (let i = firstDay; i < 7; i++) {
         const cell = document.createElement("td");
         cell.textContent = day;
-        
+
         // Check if there is a task on this day
-        const taskForDay = tasks.find(task => new Date(task.date).getDate() === day);
+        const taskForDay = tasks.find(task => {
+            return new Date(task.date).getDate() === day &&
+                new Date(task.date).getMonth() === month &&
+                new Date(task.date).getFullYear() === year;
+        });
+
         if (taskForDay) {
             const taskDiv = document.createElement("div");
             taskDiv.textContent = taskForDay.taskName; // Show task name in the cell
+            taskDiv.classList.add("task");
             cell.appendChild(taskDiv);
         }
 
@@ -48,18 +56,23 @@ function generateCalendar(date, tasks = []) {
     }
     calendarBody.appendChild(row);
 
-    // Continue adding rows and days
+    // Create remaining rows for the month
     while (day <= daysInMonth) {
         row = document.createElement("tr");
         for (let i = 0; i < 7 && day <= daysInMonth; i++) {
             const cell = document.createElement("td");
             cell.textContent = day;
 
-            // Check if there is a task on this day
-            const taskForDay = tasks.find(task => new Date(task.date).getDate() === day);
+            const taskForDay = tasks.find(task => {
+                return new Date(task.date).getDate() === day &&
+                    new Date(task.date).getMonth() === month &&
+                    new Date(task.date).getFullYear() === year;
+            });
+
             if (taskForDay) {
                 const taskDiv = document.createElement("div");
                 taskDiv.textContent = taskForDay.taskName;
+                taskDiv.classList.add("task");
                 cell.appendChild(taskDiv);
             }
 
@@ -70,17 +83,15 @@ function generateCalendar(date, tasks = []) {
     }
 }
 
-// Go to the previous month
 function prevMonth() {
     currentDate.setMonth(currentDate.getMonth() - 1);
     generateCalendar(currentDate);
 }
 
-// Go to the next month
 function nextMonth() {
     currentDate.setMonth(currentDate.getMonth() + 1);
     generateCalendar(currentDate);
 }
 
-// Generate the current month when the page loads
+// Initialize the calendar when the page loads
 generateCalendar(currentDate);
