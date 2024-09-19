@@ -9,34 +9,35 @@ task = Blueprint('task', __name__)
 @login_required
 def create_task():
     from website import db
-    from .models import Task, Group, user_group, TaskFrequency, TaskStatus
+    from .models import Task, Group, user_group
     if request.method == 'POST':
-            task_name = request.form.get('task')
-            frequency = request.form.get('frequency')
-            group_name = request.form.get('group_name')
+        task_name = request.form.get('task')
+        frequency = request.form.get('frequency')
+        group_name = request.form.get('group_name')
 
-            group = Group.query.filter_by(group_name=group_name).first()
+        # Define allowed frequency values
+        allowed_frequencies = ['Daily', 'Weekly', 'Fortnightly', 'Monthly']
 
-            # Check if the frequency is a valid TaskFrequency member
-            if frequency in TaskFrequency.__members__:
-                frequency_enum = TaskFrequency[frequency]
-            else:
-                flash('Invalid task frequency! Please choose from Daily, Weekly, Fortnightly, or Monthly.', category='error')
-                return redirect(url_for('task.create_task'))
-                                
-            if group:
-                flash('Task added!', category='success')
-                new_task = Task(
-                    task_name=task_name, 
-                    user_id=current_user.id, 
-                    frequency=frequency_enum, 
-                    group_id=group.id
-                )
-                db.session.add(new_task)
-                db.session.commit()
-                return redirect(url_for('task.create_task'))
-            else:
-                flash('Group id does not exist, please insert again', category='error')
+        # Check if the frequency is valid
+        if frequency not in allowed_frequencies:
+            flash('Invalid task frequency! Please choose from Daily, Weekly, Fortnightly, or Monthly.', category='error')
+            return redirect(url_for('task.create_task'))
+        
+        group = Group.query.filter_by(group_name=group_name).first()
+
+        if group:
+            flash('Task added!', category='success')
+            new_task = Task(
+                task_name=task_name, 
+                user_id=current_user.id, 
+                frequency=frequency,  # Directly use the frequency string
+                group_id=group.id
+            )
+            db.session.add(new_task)
+            db.session.commit()
+            return redirect(url_for('task.create_task'))
+        else:
+            flash('Group name does not exist, please insert again', category='error')
 
     return render_template("create_task.html", user=current_user)
 
