@@ -1,12 +1,10 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %}
+{% extends "base.html" %} 
+{% block title %}Home{% endblock %}
 
 {% block content %}
-<h1 This is Home Page>
+<h1>Home</h1>
     <!-- Add buttons to navigate to other pages in this block -->
-<div>
-    <button type="button" class="btn">Create New Task</button>
-    <button type="button" class="btn">View New Tasks</button>
-    <button type="button" class="btn">Generate Schedule</button>
-</div>  
-</h1>
+    <a href="{{ url_for('group.create_group') }}">
+        <button>Create Group</button>
+    </a>
 {% endblock %}

@@ -9,21 +9,35 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin: 20px;
         }
         .calendar-header {
             display: flex;
             justify-content: space-between;
             width: 100%;
+            max-width: 600px; /* Optional: limits the width of the calendar */
         }
         table {
             border-collapse: collapse;
             margin: 20px 0;
+            width: 100%; /* Ensure the table takes the full width of its container */
         }
         td, th {
             border: 1px solid #000;
             padding: 10px;
             width: 50px;
+            height: 50px; /* Ensures cells are square */
             text-align: center;
+            vertical-align: top; /* Aligns content to the top of the cell */
+        }
+        .calendar-date {
+            font-size: 12px; /* Smaller font size for dates */
+            color: #666;
+            margin-top: 5px;
+        }
+        .task {
+            margin-top: 10px; /* Space above tasks */
+            font-size: 12px; /* Adjust font size as needed */
         }
     </style>
 </head>

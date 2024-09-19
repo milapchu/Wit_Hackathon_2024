@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}View Tasks{% endblock %}
+
+{% block content %}
+    <h3>Your Tasks</h3>
+    {% if tasks %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Task Name</th>
+                <th>Frequency</th>
+                <th>Status</th>
+                <th>Date Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.task_name }}</td>
+                <td>{{ task.frequency }}</td>
+                <td>{{ task.status }}</td>
+                <td>{{ task.date.strftime('%Y-%m-%d') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No tasks found. You can create tasks from the Create Task page.</p>
+    {% endif %}
+{% endblock %}

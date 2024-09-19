@@ -1,0 +1,30 @@
+/* Ensure the table takes up the full width and cells are correctly aligned */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Basic styling for table cells */
+td {
+    width: 100px; /* Adjust this as needed for cell size */
+    height: 100px; /* Adjust this for the cell height */
+    border: 1px solid #ddd; /* Light gray border for cells */
+    position: relative; /* Allows positioning of child elements within the cell */
+    vertical-align: top; /* Aligns content to the top of the cell */
+}
+
+/* Styling for the date inside the cell */
+.calendarBody {
+    position: absolute; /* Positioning relative to the cell */
+    top: 5px; /* Distance from the top */
+    right: 5px; /* Distance from the right */
+    font-size: 12px; /* Smaller font size for the date */
+    color: #666; /* Light gray color for the date */
+}
+
+/* Styling for tasks displayed in the cell */
+.task {
+    margin-top: 20px; /* Space from the top for tasks */
+    font-size: 14px; /* Font size for task names */
+    color: #000; /* Black color for task names */
+}
