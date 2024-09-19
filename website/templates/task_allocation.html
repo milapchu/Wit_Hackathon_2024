@@ -31,13 +31,48 @@
                     name="frequency" 
                     required
                 >
-                    <option value="DAILY">Daily</option>
-                    <option value="WEEKLY">Weekly</option>
-                    <option value="FORTNIGHTLY">Fortnightly</option>
-                    <option value="MONTHLY">Monthly</option>
+                    <option value="Daily">Daily</option>
+                    <option value="Weekly">Weekly</option>
+                    <option value="Fortnightly">Fortnightly</option>
+                    <option value="Monthly">Monthly</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Allocate Tasks</button>
+        </form>
+
+        <hr>
+
+        <!-- Display tasks allocated to the current user -->
+        <h3 class="mt-4">Your Tasks</h3>
+        <form method="POST" action="{{ url_for('task.update_task_status') }}">
+            <table class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Frequency</th>
+                        <th>Status</th>
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                        <tr>
+                            <td>{{ task.task_name }}</td>
+                            <td>{{ task.frequency }}</td>
+                            <td>
+                                <select class="form-control" name="status_{{ task.id }}">
+                                    <option value="DONE" {% if task.status == 'DONE' %}selected{% endif %}>Done</option>
+                                    <option value="NOT_DONE" {% if task.status == 'NOT_DONE' %}selected{% endif %}>Not Done</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="hidden" name="task_id_{{ task.id }}" value="{{ task.id }}">
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary">Update Status</button>
         </form>
     </div>
 {% endblock %}

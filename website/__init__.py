@@ -8,13 +8,28 @@ import atexit
 db = SQLAlchemy()
 DB_NAME = "database.db"
 
-def create_app():
+# Configuration classes
+class Config:
+    SECRET_KEY = 'your_secret_key'
+    SQLALCHEMY_DATABASE_URI = f'sqlite:///{DB_NAME}'
+
+class TestingConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
+
+def create_app(config_name='default'):
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'BFAJBFAJDBCDABCIUDAKBCDBCJHAB'
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+
+    # Load configuration
+    if config_name == 'testing':
+        app.config.from_object(TestingConfig)
+    else:
+        app.config.from_object(Config)
+
+    # Initialize database
     db.init_app(app)
 
-    # Register blueprints for routing
+    # Register blueprints
     from .views import views
     from .auth import auth
     from .task import task
@@ -25,11 +40,12 @@ def create_app():
     app.register_blueprint(task, url_prefix='/task')
     app.register_blueprint(group, url_prefix='/group')
 
-    # Initialize the database
+    # Create database tables
     with app.app_context():
         from .models import User, Group, Task
         db.create_all()
 
+    # Set up LoginManager
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
@@ -39,9 +55,8 @@ def create_app():
         from .models import User
         return User.query.get(int(id))
 
-    from .task import allocate_tasks_by_frequency
-
     # Set up APScheduler for task allocation
+    from .task import allocate_tasks_by_frequency
     scheduler = BackgroundScheduler()
     scheduler.add_job(func=allocate_tasks_by_frequency, trigger="interval", hours=24)  # Runs every 24 hours
     scheduler.start()
