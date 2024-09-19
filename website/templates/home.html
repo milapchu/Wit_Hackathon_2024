@@ -1,19 +1,21 @@
-{% extends "base.html" %} 
-{% block title %}Home{% endblock %}
+{% extends "base.html" %}
 
-{% block content %}
 <h1>Home</h1>
 <div class="button-container">
     <!-- Add buttons to navigate to other pages in this block -->
-    <a href="{{ url_for('group.create_group') }}" class="button-link">
+    <a href="{{ url_for('group.create_group') }}">
         <button class="custom-button">Create Group</button>
     </a>
 
-    <a href="{{ url_for('group.join_group') }}" class="button-link">
+    <a href="{{ url_for('group.join_group') }}">
         <button class="custom-button">Join Group</button>
     </a>
 </div>
-{% endblock %}
+
+<!-- Add an image below the buttons -->
+<div class="image-container">
+    <img src="https://e0.pxfuel.com/wallpapers/986/518/desktop-wallpaper-brown-bear-aesthetic-explore-tumblr-posts-and-blogs-korean-bear.jpg" alt="Custom Image">
+</div>
 
 <style>
     body {
@@ -23,17 +25,17 @@
         margin: 0;
         padding: 0;
         display: flex;
-        flex-direction: column; /* Align items vertically */
         justify-content: flex-start; /* Align content to the top */
-        align-items: center; /* Center content horizontally */
+        align-items: center;
         height: 100vh;
-        padding-top: 50px; /* Add some padding at the top */
+        flex-direction: column;
     }
 
     h1 {
         text-align: center;
         font-size: 36px;
-        margin-bottom: 40px;
+        margin-bottom: 20px; /* Reduce margin below "Home" */
+        margin-top: 20px; /* Add space from the top of the page */
         color: #855e46; /* Light brown color for title */
     }
 
@@ -41,12 +43,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 20px; /* Space between buttons */
-    }
-
-    .button-link {
-        text-decoration: none; /* Remove underline */
-        color: inherit; /* Ensure the link adopts the button's text color */
+        gap: 15px; /* Reduce space between buttons */
+        margin-top: 10px; /* Move buttons closer to the "Home" text */
     }
 
     .custom-button {
@@ -59,11 +57,8 @@
         font-size: 20px;
         cursor: pointer;
         transition: background-color 0.3s ease;
-        width: 200px; /* Set a consistent width */
-        height: 60px; /* Set a consistent height */
-        display: flex; /* Use flexbox to center text */
-        align-items: center;
-        justify-content: center;
+        min-width: 200px; /* Ensure both buttons are the same size */
+        text-align: center;
     }
 
     .custom-button:hover {
@@ -76,5 +71,17 @@
 
     .custom-button:focus {
         outline: none;
+    }
+
+    .image-container {
+        margin-top: 100px; /* Space between buttons and image */
+        text-align: center;
+    }
+
+    .image-container img {
+        width: 300px; /* Set the width of the image */
+        height: 300px; /* Set the height of the image to make it a square */
+        border-radius: 50%; /* Make the image circular */
+        object-fit: cover; /* Crop the image to fit within the square */
     }
 </style>
