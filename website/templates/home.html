@@ -1,10 +1,24 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
+
 {% block title %}Home{% endblock %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+{% endblock %}
+
 {% block content %}
-<h1>Home</h1>
-    <!-- Add buttons to navigate to other pages in this block -->
-    <a href="{{ url_for('group.create_group') }}">
-        <button>Create Group</button>
-    </a>
+    <div id="home-page">
+        <h1 id="home">Home</h1>
+        <div class="button-container">
+            <a href="{{ url_for('group.create_group') }}">
+                <button class="custom-button">Create Group</button>
+            </a>
+            <a href="{{ url_for('group.join_group') }}">
+                <button class="custom-button">Join Group</button>
+            </a>
+        </div>
+        <div class="image-container">
+            <img src="https://e0.pxfuel.com/wallpapers/986/518/desktop-wallpaper-brown-bear-aesthetic-explore-tumblr-posts-and-blogs-korean-bear.jpg" alt="Custom Image">
+        </div>
+    </div>
 {% endblock %}
