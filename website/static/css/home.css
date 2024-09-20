@@ -1,0 +1,68 @@
+#home-page body {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #f2dfb9; /* Beige background */
+    color: #5b3e31; /* Dark brown text */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start; /* Align content to the top */
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+#home-page h1 {
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 45px;
+    margin-bottom: 20px; /* Reduce margin below "Home" */
+    margin-top: 20px; /* Add space from the top of the page */
+    color: #855e46; /* Light brown color for title */
+}
+
+#home-page .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Reduce space between buttons */
+    margin-top: 10px; /* Move buttons closer to the "Home" text */
+}
+
+#home-page .custom-button {
+    background-color: #d8cbc4; /* Light brown */
+    color: #5b3e31; /* Dark brown text */
+    border: 2px solid #5b3e31;
+    border-radius: 10px;
+    padding: 15px 40px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-width: 200px; /* Ensure both buttons are the same size */
+    text-align: center;
+}
+
+#home-page .custom-button:hover {
+    background-color: #bca89f; /* Darker beige on hover */
+}
+
+#home-page .custom-button:active {
+    background-color: #a48978; /* Even darker on click */
+}
+
+#home-page .custom-button:focus {
+    outline: none;
+}
+
+#home-page .image-container {
+    margin-top: 100px; /* Space between buttons and image */
+    text-align: center;
+}
+
+#home-page .image-container img {
+    width: 300px; /* Set the width of the image */
+    height: 300px; /* Set the height of the image to make it a square */
+    border-radius: 50%; /* Make the image circular */
+    object-fit: cover; /* Crop the image to fit within the square */
+    object-position: center top;
+}

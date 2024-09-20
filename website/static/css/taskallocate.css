@@ -1,0 +1,112 @@
+/* General body and font settings */
+body {
+    font-family: 'Times New Roman', sans-serif;
+    background-color: #ede8d0; /* Dark brown background */
+    color: #f5e8d0; /* Light beige text */
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Heading style */
+h2 {
+    font-size: 36px;
+    color: #8c5e3c; /* Beige text for heading */
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid #d3bfa7; /* Light brown underline */
+    padding-bottom: 10px;
+}
+
+/* Form group styling */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Label for select box */
+label {
+    font-size: 18px;
+    color: #f5e8d0;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Select box styling */
+select.form-control {
+    width: 100%;
+    padding: 20px;
+    font-size: 16px;
+    background-color: #f5e8d0; /* Beige background */
+    color: #5b3a29; /* Dark brown text */
+    border: 2px solid #d3bfa7; /* Light brown border */
+    border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+select.form-control:focus {
+    outline: none;
+    border-color: #a58d68; /* Darker brown border on focus */
+}
+
+/* Button styles */
+button.btn {
+    padding: 10px 20px;
+    background-color: #8c5e3c; /* Warm brown background */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+button.btn:hover {
+    background-color: #a58d68; /* Lighter brown on hover */
+}
+
+/* Add some margin between the buttons */
+button.btn + button.btn {
+    margin-left: 10px;
+}
+
+/* Flash messages styling (if any are used) */
+.flash-message {
+    background-color: #d9c2a0; /* Light brown for flash message */
+    color: #5b3e31; /* Dark brown text */
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* Center the form on the page */
+form {
+    text-align: center;
+}
+
+.hero-section {
+    background-color: #ac927b; 
+    text-align: center;
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+    margin-top: 30px;
+}
+
+.hero-section img {
+    width: 250px; /* Set a fixed width */
+    height: 250px; /* Set a fixed height to make it a square */
+    border-radius: 10px; /* Create rounded corners */
+    object-fit: cover;
+    z-index: 1;
+    position: absolute; /* Use absolute positioning */
+    bottom: 20px; /* Distance from the bottom */
+    right: 20px; /* Distance from the right */
+    object-position: center right; /* Center the image inside the box */
+}
+
+
+
+
+
