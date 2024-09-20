@@ -1,0 +1,133 @@
+body {
+    font-family: 'Times New Roman', sans-serif;
+    background-color: #ede8d0; /* Dark brown background */
+}
+
+.header {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally (optional) */
+    text-align: center;
+    border-radius: 10px;
+    padding: 40px 0;
+    background-color: #795a4b; /* Soft beige background */
+    border-bottom: 5px solid #f5e8d0; /* Warm brown border at the bottom */
+    margin-top: 20px;
+}
+
+.header-image {
+    width: 150px; /* Adjust size as needed */
+    height: 150px; /* Maintain square aspect ratio */
+    border-radius: 10px; /* Rounded corners */
+    margin-right: 20px; /* Increased space between the image and heading */
+    margin-left: 35px;
+    object-fit: cover; /* Crop the image to fit */
+    object-position: bottom; /* Focus on the bottom part of the image */
+}
+
+.header h1 {
+    font-size: 80px;
+    font-family: 'Brush Script MT', cursive; /* Cursive for a cute vibe */
+    margin-bottom: 10px;
+    color: #f5f2f0; /* Warm brown color */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.hero-section {
+    background-color: #5b3e31; /* Matching beige background */
+    padding: 60px 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    margin-top: 30px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Softer shadow for depth */
+}
+
+.centered-content {
+    background-color: #5b3e31;
+    padding: 30px;
+    border-radius: 10px; 
+    box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.1);
+    width: 1000%; 
+    border: none; 
+}
+
+.hero-section h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 20px 0;
+    color: #8c5e3c; /* Warm brown color */
+}
+
+.table {
+    width: 100%;
+    margin: 20px auto; /* Added margin for spacing */
+    background-color: #f5e8d0; /* Soft beige */
+    border-radius: 8px; /* Rounded corners for the table */
+    overflow: hidden; /* To apply border-radius effect */
+}
+
+.table thead {
+    background-color: #8c5e3c; 
+    color: #fff; 
+    font-weight: bold;
+}
+
+.table thead th {
+    background-color: #8c5e3c !important; 
+    color: #fff !important;
+}
+
+.table, .table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table th, .table td {
+    padding: 15px;
+    transition: background-color 0.3s; 
+}
+
+.table tr:nth-child(even) td {
+    background-color: #f2e7d5; /* Light beige for even rows */
+}
+
+.table tr:hover td {
+    background-color: #d9c2a0; /* Darker beige on hover for effect */
+}
+
+.status-select {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #d3bfa7; /* Light brown border */
+    border-radius: 4px;
+    background-color: #f5f5dc; /* Beige background */
+    color: #5b3a29; /* Dark brown text */
+    appearance: none; /* Remove default styling */
+    background-image: url('data:image/png;base64,...'); /* Optional: Add a cute dropdown arrow image */
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Position for the arrow */
+}
+
+/* Optional: Change the select box color on hover and focus */
+.status-select:hover, .status-select:focus {
+    border-color: #a58d68; /* Darker brown on hover */
+    outline: none; /* Remove default outline */
+}
+
+/* Additional styles for cute buttons (optional) */
+.button {
+    padding: 10px 20px;
+    background-color: #8c5e3c; /* Warm brown */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+

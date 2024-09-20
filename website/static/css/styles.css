@@ -1,0 +1,11 @@
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #cfcbb7; /* Beige background */
+    color: #5b3e31; /* Dark brown text */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start; /* Align content to the top */
+    height: 100vh;
+    flex-direction: column;
+}

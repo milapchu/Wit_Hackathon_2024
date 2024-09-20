@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/taskallocate.css') }}">
+{% endblock %}
+
 {% block title %}
     Allocate Tasks
 {% endblock %}
@@ -14,13 +18,7 @@
         <form method="POST">
             <div class="form-group">
                 <label for="frequency">Select Task Frequency</label>
-                <select 
-                    class="form-control" 
-                    id="frequency" 
-                    name="frequency" 
-                    required
-                >
-                    <option value="Daily">Daily</option>
+                <select class="form-control" id="frequency" name="frequency" required>
                     <option value="Weekly">Weekly</option>
                     <option value="Fortnightly">Fortnightly</option>
                     <option value="Monthly">Monthly</option>
@@ -29,5 +27,10 @@
             <button type="submit" name="action" value="view_allocated" class="btn btn-primary">View Your Allocated Tasks</button>
             <button type="submit" name="action" value="view_all" class="btn btn-primary">View All Tasks</button>
         </form>
+    </div>
+
+    <!-- Hero section with image -->
+    <div class="hero-section">
+        <img src="{{ url_for('static', filename='images/bearallocate.png') }}" alt="Bear for task allocation">
     </div>
 {% endblock %}
