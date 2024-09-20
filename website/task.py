@@ -1,7 +1,15 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for, send_file
 from flask_login import login_required, current_user
 import random
 from datetime import datetime, timedelta
+from website import db
+
+from sqlalchemy import func
+import matplotlib.pyplot as plt
+import io
+from .models import Task,Group,User
+import os
+
 
 task = Blueprint('task', __name__)
 
@@ -120,11 +128,9 @@ def allocate_tasks():
         user_group_id = current_user.group.id
         frequency = request.form.get('frequency')
         action = request.form.get('action')
-        
+    
         group = Group.query.get(user_group_id)
-
         if user_group_id:
-            # Call the task allocation function
             allocate_tasks_randomly(group_id=user_group_id, frequency=frequency)
 
             if action == 'view_allocated':
@@ -137,3 +143,19 @@ def allocate_tasks():
             flash('You have not been in any group, please create or join one', category='error')
 
     return render_template('task_allocation.html', user=current_user)
+
+
+# import matplotlib
+# matplotlib.use('Agg')
+@task.route('/task_summary', methods=['GET'])
+@login_required
+def task_summary():
+    total_tasks= db.session.query(func.count(Task.id)).filter(Task.user_id == current_user.id).scalar()
+    not_done_tasks = db.session.query(func.count(Task.id)).filter(Task.user_id == current_user.id, Task.status == 'Not Done').scalar()
+    done_tasks = total_tasks - not_done_tasks
+
+    done_percentage = (done_tasks / total_tasks * 100) if total_tasks > 0 else 0
+    not_done_percentage = (not_done_tasks / total_tasks * 100) if total_tasks > 0 else 0
+
+
+    return render_template('task_summary.html', user=current_user, done_percentage=done_percentage, not_done_percentage=not_done_percentage)
