@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Join a Group
+{% endblock %}
+
+{% block content %}
+    <div class="mt-5">
+        <h2>Join a Group</h2>
+        
+        <!-- Check if the user is already in a group -->
+        {% if user.group %}
+            <p>You are already a member of the group: {{ user.group.group_name }}</p>
+        {% else %}
+            <!-- Display form to join a group by name -->
+            <form method="post">
+                <div class="form-group">
+                    <label for="group_name">Enter Group Name</label>
+                    <input type="text" id="group_name" name="group_name" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Join Group</button>
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}

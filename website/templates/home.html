@@ -2,6 +2,7 @@
 
 {% block title %}Home{% endblock %}
 
+<<<<<<< HEAD
 {% block extra_css %}
     <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
 {% endblock %}
@@ -21,4 +22,15 @@
             <img src="https://e0.pxfuel.com/wallpapers/986/518/desktop-wallpaper-brown-bear-aesthetic-explore-tumblr-posts-and-blogs-korean-bear.jpg" alt="Custom Image">
         </div>
     </div>
+=======
+{% block content %}
+<h1>Home</h1>
+    <!-- Add buttons to navigate to other pages in this block -->
+    <a href="{{ url_for('group.create_group') }}">
+        <button>Create Group</button>
+    </a>
+    <a href="{{url_for('group.join_group')}}">
+        <button>Join a group</button>
+    </a>
+>>>>>>> main
 {% endblock %}
