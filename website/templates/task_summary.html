@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="header">
+        </div>
+
+        <div class="task-status">
+            <h3>Task Completion Status</h3>
+            <p>Tasks Done: {{ done_percentage }}%</p>
+            <p>Tasks Not Done: {{ not_done_percentage }}%</p>
+        </div>
+
+        <div class="navigation">
+            <a href="{{ url_for('views.home') }}">Back to Home</a>
+        </div>
+    </div>
+{% endblock %}
