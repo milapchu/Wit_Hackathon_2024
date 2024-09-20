@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}
-    {{ user.first_name }}'s Task Summary
-{% endblock %}
+
 
 {% block extra_css %}
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -11,7 +9,6 @@
 {% block content %}
     <div class="container mt-5">
         <div class="header">
-            <h1>{{ user.first_name }}'s Task Summary</h1>
         </div>
 
         <div class="task-status">
