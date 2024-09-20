@@ -52,7 +52,7 @@ def view_tasks():
     
     if not current_user.group:
         flash('You are not in any group.', category='error')
-        return redirect(url_for('some_other_view'))  # Redirect to an appropriate view
+        return redirect('task.view_tasks')  # Redirect to an appropriate view
 
     # Retrieve only the tasks assigned to the current user in their group
     tasks = Task.query.filter_by(group_id=current_user.group.id, user_id=current_user.id).all()
