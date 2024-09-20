@@ -1,6 +1,6 @@
 #home-page body {
     font-family: 'Times New Roman', Times, serif;
-    background-color: #f5f1e9; /* Beige background */
+    background-color: #f2dfb9; /* Beige background */
     color: #5b3e31; /* Dark brown text */
     margin: 0;
     padding: 0;
@@ -13,7 +13,8 @@
 
 #home-page h1 {
     text-align: center;
-    font-size: 36px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 45px;
     margin-bottom: 20px; /* Reduce margin below "Home" */
     margin-top: 20px; /* Add space from the top of the page */
     color: #855e46; /* Light brown color for title */
@@ -63,4 +64,5 @@
     height: 300px; /* Set the height of the image to make it a square */
     border-radius: 50%; /* Make the image circular */
     object-fit: cover; /* Crop the image to fit within the square */
+    object-position: center top;
 }

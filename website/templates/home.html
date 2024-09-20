@@ -3,7 +3,7 @@
 {% block title %}Home{% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -18,7 +18,7 @@
             </a>
         </div>
         <div class="image-container">
-            <img src="https://e0.pxfuel.com/wallpapers/986/518/desktop-wallpaper-brown-bear-aesthetic-explore-tumblr-posts-and-blogs-korean-bear.jpg" alt="Custom Image">
+            <img src="{{ url_for('static', filename='images/bearhome.jpg') }}" alt="Bear Home">
         </div>
     </div>
 

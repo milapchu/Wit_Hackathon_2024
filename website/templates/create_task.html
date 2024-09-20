@@ -3,7 +3,7 @@
 {% block title %}Create Task{% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='createtasks.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/createtasks.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -56,7 +56,7 @@
     <!-- Hero section with image -->
     <div class="hero-section">
         <h2 align="center">Let's organise your week!!</h2>
-        <img src="https://th.bing.com/th?q=Beige+Bear+Cartoon+Wallpaper&w=120&h=120&c=1&rs=1&qlt=90&cb=1&dpr=2&pid=InlineBlock&mkt=en-AU&cc=AU&setlang=en&adlt=strict&t=1&mw=247" alt="Bear">
+        <img src="{{ url_for('static', filename='images/bearcreate.jpg') }}" alt="Bear Create">
     </div>
 
     {{ text }}
