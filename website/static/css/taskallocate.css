@@ -1,17 +1,16 @@
 /* General body and font settings */
 body {
-    font-family: 'Times New Roman', sans-serif;
-    background-color: #ede8d0; /* Dark brown background */
-    color: #f5e8d0; /* Light beige text */
+    font-family: 'Times New Roman', serif;
+    background-color: #ede8d0; /* Light brown background */
+    color: #5b3a29; /* Dark brown text for better contrast */
     margin: 0;
     padding: 0;
 }
 
-
 /* Heading style */
 h2 {
     font-size: 36px;
-    color: #8c5e3c; /* Beige text for heading */
+    color: #8c5e3c; /* Darker brown for heading */
     margin-bottom: 20px;
     text-align: center;
     border-bottom: 2px solid #d3bfa7; /* Light brown underline */
@@ -26,7 +25,7 @@ h2 {
 /* Label for select box */
 label {
     font-size: 18px;
-    color: #f5e8d0;
+    color: #5b3a29; /* Dark brown for better readability */
     margin-bottom: 10px;
     display: block;
 }
@@ -34,8 +33,8 @@ label {
 /* Select box styling */
 select.form-control {
     width: 100%;
-    padding: 20px;
-    font-size: 16px;
+    padding: 10px; /* Adjusted padding to be more user-friendly */
+    font-size: 23px;
     background-color: #f5e8d0; /* Beige background */
     color: #5b3a29; /* Dark brown text */
     border: 2px solid #d3bfa7; /* Light brown border */
@@ -56,13 +55,14 @@ button.btn {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, box-shadow 0.3s;
     font-size: 16px;
     margin-right: 10px;
 }
 
 button.btn:hover {
     background-color: #a58d68; /* Lighter brown on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow on hover */
 }
 
 /* Add some margin between the buttons */
@@ -83,10 +83,13 @@ button.btn + button.btn {
 /* Center the form on the page */
 form {
     text-align: center;
+    max-width: 500px; /* Added width to limit form size */
+    margin: 0 auto; /* Center form horizontally */
 }
 
+/* Hero section with background */
 .hero-section {
-    background-color: #ac927b; 
+    background-color: #ac927b;
     text-align: center;
     padding: 120px 0;
     position: relative;
@@ -94,9 +97,10 @@ form {
     margin-top: 30px;
 }
 
+/* Hero image styling */
 .hero-section img {
     width: 250px; /* Set a fixed width */
-    height: 250px; /* Set a fixed height to make it a square */
+    height: 250px; /* Set a fixed height */
     border-radius: 10px; /* Create rounded corners */
     object-fit: cover;
     z-index: 1;
@@ -105,8 +109,3 @@ form {
     right: 20px; /* Distance from the right */
     object-position: center right; /* Center the image inside the box */
 }
-
-
-
-
-

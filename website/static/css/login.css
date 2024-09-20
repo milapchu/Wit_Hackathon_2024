@@ -84,12 +84,12 @@
 
     .left-image-container {
         border-radius: 50%;
-        left: 100;
+        left: 0;
     }
 
     .right-image-container {
         border-radius: 50%;
-        right: 100;
+        right: 0;
     }
 
     .side-image {

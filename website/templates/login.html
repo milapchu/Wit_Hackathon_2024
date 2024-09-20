@@ -8,7 +8,7 @@
 {% block content %}
 <div class="container">
     <div class="image-container left-image-container">
-        <img src="https://i.pinimg.com/474x/ca/f1/49/caf14955254bb5f67c4f781a385b5355.jpg" class="side-image left-image" alt="Left Image">
+        <img src="{{ url_for('static', filename='images/bearlogin.jpg') }}" alt="Left Image" class="side-image">
     </div>
     <div class="login-wrapper">
         <form method="POST" class="login-form">
@@ -36,7 +36,7 @@
         </form>
     </div>
     <div class="image-container right-image-container">
-        <img src="https://i.pinimg.com/564x/00/b3/b8/00b3b8e05007f8c0d83234ce5009cb74.jpg" class="side-image right-image" alt="Right Image">
+        <img src="{{ url_for('static', filename='images/loginbear.jpg') }}" alt="Right Image" class="side-image">
     </div>
 </div>
 {% endblock %}

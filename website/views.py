@@ -15,3 +15,4 @@ def home():
 @login_required
 def group():
     return render_template("group.html", user=current_user)
+
