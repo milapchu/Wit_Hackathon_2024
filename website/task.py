@@ -159,3 +159,32 @@ def task_summary():
 
 
     return render_template('task_summary.html', user=current_user, done_percentage=done_percentage, not_done_percentage=not_done_percentage)
+
+
+@task.route('/update_task_status', methods=['POST'])
+@login_required
+def update_task_status():
+    from website import db
+    from .models import Task
+
+
+    from flask import jsonify
+
+    data = request.get_json()
+    task_id = data.get('id')
+    new_status = data.get('status')
+
+    # Convert status to match Enum case ('Done', 'Not Done')
+    new_status = 'Done' if new_status == 'done' else 'Not Done'
+
+    # Find the task assigned to the current user
+    task = Task.query.filter_by(id=task_id, user_id=current_user.id).first()
+
+    if not task:
+        return jsonify({'error': 'Task not found or you do not have permission to update this task.'}), 404
+
+    # Update task status
+    task.status = new_status
+    db.session.commit()
+
+    return jsonify({'success': True, 'message': 'Task status updated successfully.'})
